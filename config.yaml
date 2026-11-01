@@ -1,0 +1,24 @@
+server:
+  port: 8080
+  worker_threads: 4
+  headers:
+    - key: x-forwarded-host
+      value: "{{request.host}}"
+  rules:
+    - path: /
+      upstream: upstream_1
+    - path: /posts
+      upstream: upstream_2
+    - path: /posts/:id
+      upstream: upstream_2
+    - path: /posts/:id/comments
+      upstream: upstream_2
+    - path: /objects
+      upstream: upstream_3
+
+  upstreams:
+    - upstream_1: jsonplaceholder.typicode.com
+    - upstream_2: jsonplaceholder.typicode.com
+    - upstream_3: api.restful-api.dev
+
+  
