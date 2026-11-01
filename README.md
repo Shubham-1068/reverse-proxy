@@ -44,7 +44,29 @@ To rebuild and restart automatically while developing, use:
 npm run dev
 ```
 
-## Try a request
+## Try the live Render deployment
+
+The project is deployed for testing at [https://reverse-proxy-gzrm.onrender.com](https://reverse-proxy-gzrm.onrender.com). Try these URLs in a browser or with `curl`:
+
+| Proxy URL | Configured route | Upstream |
+| --- | --- | --- |
+| [`/`](https://reverse-proxy-gzrm.onrender.com/) | `/` | `jsonplaceholder.typicode.com` |
+| [`/posts`](https://reverse-proxy-gzrm.onrender.com/posts) | `/posts` | `jsonplaceholder.typicode.com` |
+| [`/posts/1`](https://reverse-proxy-gzrm.onrender.com/posts/1) | `/posts/:id` | `jsonplaceholder.typicode.com` |
+| [`/posts/1/comments`](https://reverse-proxy-gzrm.onrender.com/posts/1/comments) | `/posts/:id/comments` | `jsonplaceholder.typicode.com` |
+| [`/objects`](https://reverse-proxy-gzrm.onrender.com/objects) | `/objects` | `api.restful-api.dev` |
+
+For example:
+
+```sh
+curl https://reverse-proxy-gzrm.onrender.com/posts/1
+curl https://reverse-proxy-gzrm.onrender.com/posts/1/comments
+curl https://reverse-proxy-gzrm.onrender.com/objects
+```
+
+These examples use the routes and upstreams in the repository's `config.yaml`. The deployed service is for testing the learning project; it currently forwards requests as `GET` only.
+
+## Try a request locally
 
 With the example config, `/posts/1` matches `/posts/:id` and is forwarded to `jsonplaceholder.typicode.com`:
 
