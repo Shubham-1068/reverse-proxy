@@ -30,6 +30,12 @@ export async function createServer(config: serverConfig) {
         }
 
         const server = http.createServer((req, res) => {
+            if (new URL(req.url ?? "/", "http://localhost").pathname === "/") {
+                res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+                res.end("<!doctype html><html><head><title>Welcome</title></head><body style=\"display: flex; justify-content: center; align-items: center; height: 10vh; background-color: #000; color: #fff;\"><h1>Welcome to my custom Reverse Proxy!</h1></body></html>");
+                return;
+            }
+
             const randomWorker = Math.floor(Math.random() * workers.length);
             const worker = workers[randomWorker];
 
